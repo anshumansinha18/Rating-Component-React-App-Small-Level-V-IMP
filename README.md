@@ -1,70 +1,72 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# React Star Rating Component API
 
-## Available Scripts
+A highly customizable star rating component for React applications, designed to be easily integrated into any review system.
 
-In the project directory, you can run:
+## Featuers
 
-### `npm start`
+- **Highly Customizable**: This star rating component offers a wide range of customization options, allowing you to adapt it to your specific needs.
+- **Size and Classname Customization**: You can easily adjust the size and provide a custom CSS class to the star rating component.
+- **Default Rating:** Set a default rating value to display when no user rating has been given.
+- **Messages Array**: Supply an array of messages to be displayed for each rating level, adding a personal touch to your review system.
+- **Color Options:** Customize the color of the stars and other elements to match your application's design.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+##  Import
 
-### `npm test`
+Import the StarRating component into your React application:
+jsx
+```
+import StarRating from "react-star-rating-component";
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Usage
 
-### `npm run build`
+```
+import React, { useState } from "react";
+import StarRating from "react-star-rating-component";
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+function App() {
+  const [movieRating, setMovieRating] = useState(0);
+  return (
+    <>
+      <StarRating
+        maxRating={10}
+        size={24}
+        color="red"
+        className="test" // Define these classes in the styles.css
+        messages={["Terrible", "Bad", "Okay", "Good", "Amazing"]}
+        defaultRating={2}
+        onSetRating={setMovieRating}
+      />
+      <p>This movie was rated {movieRating} stars</p>
+    </>
+  );
+}
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+export default App;
+```
+## Props
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Here are the available props that you can pass to the StarRating component:
 
-### `npm run eject`
+- **maxRating (number, optional)**: The maximum rating value (default: 5).
+- **color (string, optional)**: The color of the stars (default: "#fcc419").
+- **size (number, optional)**: The size of the stars in pixels (default: 48).
+- **className (string, optional)**: Custom CSS class to be applied to the star rating container.
+- **messages (array, optional)**: Array of messages to display for each rating level.
+- **defaultRating (number, optional)**: The default rating value to display (default: 0).
+- **onSetRating (function, required):** Callback function that is triggered when a rating is set, receiving the new rating value as an argument.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Styling
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+To customize the styling of the component, you can define CSS classes and use them with the className prop. Here is an example of how you can define styles in your styles.css file:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```
+/* styles.css */
+.test {
+  /* Your custom styles go here */
+}
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
