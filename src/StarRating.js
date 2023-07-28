@@ -15,8 +15,12 @@ export default function StarRating({
   maxRating = 5,
   color = "#fcc419",
   size = 48,
+  className = "",
+  messages = [],
+  defaultRating = 0,
+  onSetRating,
 }) {
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(defaultRating);
   const [tempRating, setTempRating] = useState(0);
   const textStyle = {
     lineHeight: "1",
@@ -24,14 +28,20 @@ export default function StarRating({
     color,
     fontSize: `${size / 1.5}px`,
   };
+
+  function handleRating(rating) {
+    setRating(rating);
+    onSetRating(rating);
+  }
+
   return (
-    <div style={containerStyle}>
+    <div style={containerStyle} className={className}>
       <div style={starContainerStyle}>
         {Array.from({ length: maxRating }, (_, i) => (
           <Star
             key={i}
             full={tempRating ? tempRating >= i + 1 : rating >= i + 1}
-            onRate={() => setRating(i + 1)}
+            onRate={() => handleRating(i+1)}
             onHoverIn={() => setTempRating(i + 1)}
             onHoverOut={() => setTempRating(0)}
             tempRating={tempRating >= i + 1}
@@ -40,7 +50,11 @@ export default function StarRating({
           />
         ))}
       </div>
-      <p style={textStyle}>{tempRating || rating || ""}</p>
+      <p style={textStyle}>
+        {messages.length === maxRating
+          ? messages[tempRating ? tempRating - 1 : rating - 1]
+          : tempRating || rating || ""}
+      </p>
     </div>
   );
 }
